@@ -1,78 +1,37 @@
 Data Science Advance Project
-# Natural Language Generation
+# Natural Language Generation using LSTM
 
-## Project Overview
-This project builds a Fake News Detection System trained on a dataset containing real and fake news articles. It uses TF-IDF vectorization and a Logistic Regression or Naive Bayes classifier to analyze the textual patterns of news content. The system is deployed with Streamlit for easy interaction — users can enter a news statement and instantly see if it’s fake or real, along with a confidence score.
+This project implements a Natural Language Generation model using an LSTM network to generate text character-by-character based on a given input seed. The dataset used is a text corpus that can be replaced with any other large text file such as Shakespeare, novels, or dialogues.
 
-## Key Features
-- Text preprocessing with cleaning, stopword removal, and lemmatization
-- TF-IDF vectorization for feature extraction
-- Model trained to achieve around 98–99% accuracy
-- Streamlit web interface for real-time predictions
-- Confidence score displayed for each prediction
-- Automatically loads a trained model (or trains one if not found)
+## Dataset
+The dataset used is dataset.txt, a text corpus containing sentences or dialogues. You can replace it with any other text file of your choice to train the model on different styles of language.
+Link : https://raw.githubusercontent.com/karpathy/char-rnn/master/data/tinyshakespeare/input.txt
 
-## Why Some True Statements Are Flagged as Fake
-Short or overly simple sentences such as "Donald Trump is a president of America" may be predicted as fake because the model was trained mostly on full-length news articles. It assumes "fake" when:
-- The text resembles clickbait or incomplete statements seen in fake samples
-- The statement lacks journalistic context such as sources or structure
-- The model detects political figure mentions that often correlated with fake news in the dataset
+## Features
+- Character-level text generation using LSTM
+- Interactive Streamlit interface for live text generation
+- Adjustable generation length
+- Easily customizable dataset
 
-To improve predictions, provide more context. For example:
-"Donald Trump served as the 45th President of the United States, according to official records."
-This provides linguistic structure and facts, which help the model classify more accurately.
+## How to Run the Project
+1. Install Dependencies
+pip install tensorflow streamlit numpy pandas
 
-## Tech Stack
-- Python 3
-- Pandas, NumPy
-- NLTK (for stopwords and lemmatization)
-- Scikit-learn (for TF-IDF and model training)
-- Streamlit (for deployment)
-- Joblib (for saving/loading models)
+2. Train the Model
+Run the Jupyter notebook nlg_model.ipynb to:
+- Load and preprocess the dataset
+- Train the LSTM model
+- Save the trained model as nlg_model.h5
+- Save the dataset as dataset.txt
 
-## Dataset 
-link : https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset
+3. Use the App
+- Enter a starting seed text (for example: ROMEO:)
+- Adjust the length of text to generate
+- Click “Generate Text” to see the model’s output
 
-## Folder Structure
-Fake-News-Detection/
-│
-├── fake_news_detection.ipynb   # Model training and evaluation
-├── app.py                      # Streamlit application
-├── vectorizer.pkl              # Saved TF-IDF vectorizer
-├── model.pkl                   # Saved ML model
-├── true.csv                    # True news dataset
-├── fake.csv                    # Fake news dataset
-└── README.md                   # Project documentation
-
-## How to Run
-1. Install dependencies
-   pip install -r requirements.txt
-
-2. Run the Streamlit app
-   streamlit run app.py
-
-3. Interact with the app  
-   Enter any news content and click "Check News" to get:
-   - Real or Fake label
-   - Confidence percentage
-
-## Model Performance
-Accuracy: 98.8%  
-Precision: 0.99  
-Recall: 0.99  
-F1-score: 0.99  
-
-## Example Predictions
-Input: "The U.S. Senate passed a new infrastructure bill on Tuesday."  
-Output: Real News (Confidence: 97%)
-
-Input: "NASA confirms Earth will go dark for 15 days next month."  
-Output: Fake News (Confidence: 99%)
-
-## Future Improvements
-- Add multiple ML models for comparison
-- Include article source verification
-- Integrate live fact-checking API
+## Notes
+- The LSTM model works at the character level, so more training epochs and larger datasets improve coherence.
+- You can replace dataset.txt with any large text file (for example, novels or scripts) to train your model in a specific writing style.
 
 ## Contributing
 Contributions are welcome!
